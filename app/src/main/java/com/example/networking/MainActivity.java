@@ -29,12 +29,16 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         mountainAdapter = new MountainAdapter(mountainList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mountainAdapter);
 
+        // Execute JSON task to fetch data from the URL
         new JsonTask(this).execute(JSON_URL);
+
+        // Execute JSON file task to read data from a local file
         new JsonFile(this, this).execute("mountains.json");
     }
 
@@ -43,9 +47,12 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Log.d("MainActivity", json);
         if (json != null) {
             try {
+                // Parse the JSON response
                 JSONArray jsonArray = new JSONArray(json);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    // Extract data from JSON object
                     String name = jsonObject.getString("name");
                     String ID = jsonObject.getString("ID");
                     String type = jsonObject.getString("type");
@@ -54,9 +61,14 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
                     String category = jsonObject.getString("category");
                     int size = jsonObject.getInt("size");
                     int cost = jsonObject.getInt("cost");
+
+                    // Create a new Mountain object and add it to the list
                     mountainList.add(new Mountain(ID, name, type, company, location, category, size, cost));
                 }
+
+                // Notify the adapter that the data has changed
                 mountainAdapter.notifyDataSetChanged();
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

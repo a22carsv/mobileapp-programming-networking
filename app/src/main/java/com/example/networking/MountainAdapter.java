@@ -20,18 +20,23 @@ public class MountainAdapter extends RecyclerView.Adapter<MountainViewHolder> {
     @NonNull
     @Override
     public MountainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //create a new MountainViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mountain, parent, false);
         return new MountainViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MountainViewHolder holder, int position) {
+        // Retrieve Mountain object at given position
         Mountain mountain = mountainList.get(position);
+
+        // Bind Mountain data to ViewHolder
         holder.bind(mountain);
     }
 
     @Override
     public int getItemCount() {
+        // Return items in the mountainList
         return mountainList.size();
     }
 }

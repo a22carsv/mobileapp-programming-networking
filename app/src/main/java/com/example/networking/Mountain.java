@@ -12,6 +12,7 @@ public class Mountain {
 
     public Mountain(String ID, String name, String type, String company, String location,
                     String category, int size, int cost) {
+        // Initialize the Mountain object with provided parameters
         this.ID = ID;
         this.name = name;
         this.type = type;

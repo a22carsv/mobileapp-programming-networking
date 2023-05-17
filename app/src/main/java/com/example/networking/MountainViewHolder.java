@@ -12,11 +12,13 @@ public class MountainViewHolder extends RecyclerView.ViewHolder {
 
     public MountainViewHolder(@NonNull View itemView) {
         super(itemView);
+        // Initialize nameTextView
         nameTextView = itemView.findViewById(R.id.text_view_name);
     }
 
     public void bind(Mountain mountain) {
+        // Set name of the mountain to nameTextView
         nameTextView.setText(mountain.name);
-        // Bind other mountain properties to the corresponding views
+        // Bind mountain properties to corresponding views
     }
 }
